@@ -98,7 +98,7 @@ http.createServer(function (req,res) {
         req.on('end', function () {
             user = format(user);
             // 添加一个ID 并重新写写入文件
-            user['id']= dataAry.length==0?1:dataAry[dataAry.length-1]['id']+1;
+            user['id']= dataAry.length==0?1:Number(dataAry[dataAry.length-1]['id'])+1;
             dataAry.push(user);
             fs.writeFileSync(dataPath,JSON.stringify(dataAry));
             result={code:0,msg:'success'};
