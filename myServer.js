@@ -87,7 +87,6 @@ http.createServer(function (req,res) {
         res.end(JSON.stringify(result));
         res.writeHead(200,{'content-type':'application/json;charset=utf-8;'});
         return;
-
     }
     //增加客户信息 URL:/addInfo POST
     if(pathname=='/addInfo'){
@@ -104,8 +103,8 @@ http.createServer(function (req,res) {
             result={code:0,msg:'success'};
             res.writeHead(200,{'content-type':'application/json;charset=utf-8;'})
             res.end(JSON.stringify(result))
-            return;
         })
+        return;
     };
 //修改客户信息   URL:/updateInfo POST
     if(pathname=='/updateInfo'){
@@ -128,10 +127,13 @@ http.createServer(function (req,res) {
             };
             res.writeHead(200,{'content-type':'application/json;charset=utf-8;'});
             res.end(JSON.stringify(result));
-            return;
-        })
+        });
+        return;
     }
 
+    // 如果请求接口不是以上五个中的任意一个 直接返回404
+    res.writeHead(404,{'content-type':'application/json;charset=utf-8;'})
+    res.end('bad requestUrl')
 
 }).listen(port, function () {
     console.log('the port is',port);
